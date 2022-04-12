@@ -18,6 +18,8 @@ export class HomePage implements OnInit{
 
     this.httpServie.observeHTML().subscribe(value => {
       if(value) {
+        console.log(value.indexOf('<!--'));
+        console.log(value.indexOf('<!--', 350));
         this.html = this.sanitizer.bypassSecurityTrustHtml(value);
         const el = document.createElement( 'html' );
         el.innerHTML = value;
