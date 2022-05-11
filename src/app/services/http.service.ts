@@ -19,11 +19,25 @@ export class HttpService {
       },
       responseType: 'text'
     }).toPromise();
-    promise.then(value => {
-      this.sub.next(value);
-    })
+
+    promise
+      .then(value => {
+        this.sub.next(value);
+      })
       .catch(reason => {
         console.log('Http failed', reason);
+      });
+
+    return promise;
+  }
+
+  public login(name: string, password: string) {
+    this.httpClient.post('http://lotgd.de/login.php?', {name: name, password: password}).toPromise()
+      .then(value => {
+        console.log(value);
+      })
+      .catch(reason => {
+        console.log(reason);
       });
   }
 
