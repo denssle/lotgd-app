@@ -10,11 +10,12 @@ export class ApiInterceptor implements HttpInterceptor {
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		const baseUrl: string = document.getElementsByTagName('base')[0].href;
+    console.log('interceptor', baseUrl);
 		if (req.url.includes('lotgd.de')) {
       return next.handle(req.clone({url: `${req.url}`}));
 		}
     if(req.url.includes('templates')) {
-      console.log('image');
+      console.log('interceptor image');
     }
     return next.handle(req.clone({url: `${baseUrl}${req.url}`}));
 	}
