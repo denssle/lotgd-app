@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {HTTP} from '@awesome-cordova-plugins/http/ngx';
 
 @Injectable({
   providedIn: 'root'
@@ -8,21 +8,23 @@ import {BehaviorSubject, Observable} from 'rxjs';
 export class HttpService {
   private sub: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HTTP) {
   }
 
   public getStartPage() {
-    const promise = this.httpClient.get('https://lotgd.de/home.php?', {
+    const promise = this.httpClient.get('https://lotgd.de/home.php?', {}, {
       headers: {
-        'Accept': 'text/html, application/xhtml+xml, */*',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Accept: 'text/html, application/xhtml+xml, */*',
+        // eslint-disable-next-line @typescript-eslint/naming-convention
         'Content-Type': 'application/json; charset=utf-8'
       },
       responseType: 'text'
-    }).toPromise();
+    });
 
     promise
       .then(value => {
-        this.sub.next(value);
+        this.sub.next(value.data);
       })
       .catch(reason => {
         console.log('Http failed', reason);
@@ -32,7 +34,7 @@ export class HttpService {
   }
 
   public login(name: string, password: string) {
-    this.httpClient.post('http://lotgd.de/login.php?', {name: name, password: password}).toPromise()
+    this.httpClient.post('https://lotgd.de/login.php?', {name, password}, {})
       .then(value => {
         console.log(value);
       })
