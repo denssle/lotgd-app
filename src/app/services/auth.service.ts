@@ -13,11 +13,9 @@ export class AuthService {
   public login(name: string, password: string) {
     this.http.post('https://lotgd.de/login.php?', {name, password}, {})
       .then(value => {
-        console.log(value);
-        this.debug.debug(value);
+        this.debug.debug('SUCCESS: ' + JSON.stringify(value));
       })
       .catch(reason => {
-        console.log(reason);
         this.debug.debug('ERROR: ' + reason);
       });
   }
