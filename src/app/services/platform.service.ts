@@ -12,4 +12,8 @@ export class PlatformService {
   public isRunningOnDesktop(): boolean {
     return this.platform.is('desktop') || this.platform.is('mobileweb');
   }
+
+  getVersion(): number {
+    return 4;
+  }
 }
