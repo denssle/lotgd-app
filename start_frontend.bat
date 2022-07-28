@@ -1,12 +1,12 @@
 @echo off
 
-echo install ionic global
-call npm uninstall -g ionic
-call npm install -g @ionic/cli
+echo install ionic
+call npm uninstall --location=global ionic
+call npm install --location=global @ionic/cli
 
-echo install angular global
-call npm uninstall -g angular/cli
-call npm install -g @angular/cli
+echo install angular
+call npm uninstall --location=global angular/cli
+call npm install --location=global @angular/cli
 
 echo npm install
 call npm i
