@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="formGroup">
+        <ion-input type="text" placeholder="Name" formControlName="userName"></ion-input>
+        <ion-label color="danger" *ngIf="inputInvalid('userName')">
+          {{"Invalid Name"}}
+        </ion-label>
+
+        <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
+        <ion-label color="danger" *ngIf="inputInvalid('password')">
+          {{"Invalid Name"}}
+        </ion-label>
+        <br>
+        <ion-button (click)="onLoginClick()" [disabled]="loginDisabled()">Login</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-title>Debug</ion-card-title>
+    <ion-card-content>
+      <ion-list>
+        <ion-item *ngFor="let msg of debugMessages">
+          <ion-label>{{msg}}</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

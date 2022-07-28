@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {HTTP} from '@awesome-cordova-plugins/http/ngx';
+import {HttpClient} from '@angular/common/http';
+import {PlatformService} from './platform.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,11 +10,27 @@ import {HTTP} from '@awesome-cordova-plugins/http/ngx';
 export class HttpService {
   private sub: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  constructor(private httpClient: HTTP) {
+  constructor(private desktopHttp: HttpClient, private nativeHTTP: HTTP, private platformService: PlatformService) {
+  }
+
+  public get(url: string, headers: any): Promise<any> {
+    if (this.platformService.isRunningOnDesktop()) {
+      return this.desktopHttp.get(url, headers).toPromise();
+    }
+
+    return this.nativeHTTP.get(url, {}, headers);
+  }
+
+  public post(url: string, body: any, headers: any): Promise<any> {
+    if (this.platformService.isRunningOnDesktop()) {
+      return this.desktopHttp.post(url, body, headers).toPromise();
+    }
+
+    return this.nativeHTTP.post(url, body, headers);
   }
 
   public getStartPage() {
-    const promise = this.httpClient.get('https://lotgd.de/home.php?', {}, {
+    const promise = this.get('https://lotgd.de/home.php?', {
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
         Accept: 'text/html, application/xhtml+xml, */*',
@@ -31,16 +49,6 @@ export class HttpService {
       });
 
     return promise;
-  }
-
-  public login(name: string, password: string) {
-    this.httpClient.post('https://lotgd.de/login.php?', {name, password}, {})
-      .then(value => {
-        console.log(value);
-      })
-      .catch(reason => {
-        console.log(reason);
-      });
   }
 
   public observeHTML(): Observable<string> {

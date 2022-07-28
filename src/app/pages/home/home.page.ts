@@ -60,13 +60,13 @@ export class HomePage implements OnInit, AfterViewChecked {
     if (loginButton && !this.subscribedToLogin && nameInput && passwordInput) {
       this.subscribedToLogin = true;
       loginButton.addEventListener('click', () => {
-        this.httpServie.login(this.name, this.password);
+        // this.httpServie.login(this.name, this.password);
       });
       nameInput.addEventListener('input', ($event) => {
-        this.name = $event.target['value'];
+        // this.name = $event.target.value;
       });
       passwordInput.addEventListener('input', ($event) => {
-        this.password = $event.target['value'];
+        // this.password = $event.target.value;
       });
     }
   }
