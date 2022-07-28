@@ -20,7 +20,7 @@ export class AuthService {
         this.debug.debug('auth: data: ' + JSON.stringify(response.data));
       })
       .catch(reason => {
-        this.debug.debug('ERROR: ' + reason);
+        this.debug.debug('ERROR: ' + JSON.stringify(reason));
       });
   }
 }

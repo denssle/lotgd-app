@@ -13,11 +13,12 @@ export class LoginPage implements OnInit {
   formGroup: FormGroup;
   debugMessages: string[] = [];
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private authService: AuthService, private debug: DebugService) {
+  constructor(private router: Router, private formBuilder: FormBuilder,
+              private authService: AuthService, private debugService: DebugService) {
   }
 
   ngOnInit() {
-    this.debug.observe().subscribe(value => {
+    this.debugService.observe().subscribe(value => {
       this.debugMessages = value;
     });
     this.formGroup = this.formBuilder.group({
@@ -42,5 +43,9 @@ export class LoginPage implements OnInit {
 
   inputInvalid(controlName: string): boolean {
     return this.formGroup.get(controlName).invalid && this.formGroup.get(controlName).dirty;
+  }
+
+  deleteAll(): void {
+    this.debugService.reset();
   }
 }
