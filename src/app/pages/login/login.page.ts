@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {DebugService} from '../../services/debug.service';
+import {PlatformService} from '../../services/platform.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,10 +15,12 @@ export class LoginPage implements OnInit {
   debugMessages: string[] = [];
 
   constructor(private router: Router, private formBuilder: FormBuilder,
-              private authService: AuthService, private debugService: DebugService) {
+              private authService: AuthService, private debugService: DebugService,
+              private platformService: PlatformService) {
   }
 
   ngOnInit() {
+    this.platformService.loadAppInfos();
     this.debugService.observe().subscribe(value => {
       this.debugMessages = value;
     });
@@ -47,5 +50,9 @@ export class LoginPage implements OnInit {
 
   deleteAll(): void {
     this.debugService.reset();
+  }
+
+  getVersion() {
+    return this.platformService.getVersion();
   }
 }
