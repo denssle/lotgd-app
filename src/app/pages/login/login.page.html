@@ -13,12 +13,12 @@
       <form [formGroup]="formGroup">
         <ion-input type="text" placeholder="Name" formControlName="userName"></ion-input>
         <ion-label color="danger" *ngIf="inputInvalid('userName')">
-          {{"Invalid Name"}}
+          {{"Name zu kurz"}}
         </ion-label>
 
         <ion-input type="password" placeholder="Password" formControlName="password"></ion-input>
         <ion-label color="danger" *ngIf="inputInvalid('password')">
-          {{"Invalid Name"}}
+          {{"Passwort zu kurz"}}
         </ion-label>
         <br>
         <ion-button (click)="onLoginClick()" [disabled]="loginDisabled()">Login</ion-button>
