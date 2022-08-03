@@ -4,10 +4,10 @@ import {DebugService} from '../../../services/debug.service';
 
 @Component({
   selector: 'app-debug-menu',
-  templateUrl: './profile-burger-menu.component.html',
-  styleUrls: ['./profile-burger-menu.component.scss'],
+  templateUrl: './debug-menu.component.html',
+  styleUrls: ['./debug-menu.component.scss'],
 })
-export class ProfileBurgerMenuComponent implements OnInit {
+export class DebugMenuComponent implements OnInit {
   selectOptions: string[] = ['all', 'error', 'info'];
   subscriptions: Subscription[] = [];
   debugMessages: string[];

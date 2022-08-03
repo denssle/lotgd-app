@@ -5,7 +5,7 @@ import {FormsModule} from '@angular/forms';
 import {HomePage} from './home.page';
 
 import {HomePageRoutingModule} from './home-routing.module';
-import {ProfileBurgerMenuComponent} from './profile-burger-menu/profile-burger-menu.component';
+import {DebugMenuComponent} from './debug-menu/debug-menu.component';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import {ProfileBurgerMenuComponent} from './profile-burger-menu/profile-burger-m
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, ProfileBurgerMenuComponent]
+  declarations: [HomePage, DebugMenuComponent]
 })
 export class HomePageModule {
 }
