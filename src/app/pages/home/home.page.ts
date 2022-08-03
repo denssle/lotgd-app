@@ -15,9 +15,8 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
-    this.responseService.observeHTML().subscribe((html: SafeHtml) => {
+    this.responseService.observeSanitizedHTML().subscribe((html: SafeHtml) => {
       if (html) {
-        this.debugService.debug(JSON.stringify(html));
         this.html = html;
       }
     });

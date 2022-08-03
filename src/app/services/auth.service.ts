@@ -21,9 +21,13 @@ export class AuthService {
       .then(value => {
         const response = value as HTTPResponse;
         // this.debug.debug('AUTH: header: ' + JSON.stringify(response.headers));
-        this.authenticated.next(true);
-        this.responseService.update(JSON.stringify(response.data));
-        this.router.navigate(['home']);
+        this.responseService.update(response.data);
+        if (this.responseService.isLoggedIn()) {
+          this.authenticated.next(true);
+          this.router.navigate(['home']);
+        } else {
+          this.debugService.debug('Auth failed ');
+        }
       })
       .catch(reason => {
         this.debugService.debug('ERROR: ' + reason);

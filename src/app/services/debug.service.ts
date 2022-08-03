@@ -12,7 +12,7 @@ export class DebugService {
 
   public debug(message: string): void {
     const list = this.debugMessages.getValue();
-    list.unshift(message);
+    list.push(message);
     this.debugMessages.next(list);
   }
 

@@ -1,40 +1,60 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {DebugService} from './debug.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HtmlResponseService {
-  private lastHTML: BehaviorSubject<SafeHtml> = new BehaviorSubject<SafeHtml>(null);
+  private htmlElement: BehaviorSubject<HTMLElement> = new BehaviorSubject<HTMLElement>(null);
+  private sanitizerHtmlElement: BehaviorSubject<SafeHtml> = new BehaviorSubject<SafeHtml>(null);
 
-  constructor(private sanitizer: DomSanitizer) {
+  constructor(private sanitizer: DomSanitizer, private debugService: DebugService) {
   }
 
-  update(value: string) {
-    this.lastHTML.next(this.reformatHTML(value));
+  update(value: string): void {
+    const html: HTMLElement = this.reformatHTML(value);
+    this.htmlElement.next(html);
+    this.sanitizerHtmlElement.next(this.sanitizer.bypassSecurityTrustHtml(html.innerHTML));
+    this.debugService.debug('nav: ' + this.findElementsByClassName('nav')?.length);
+    this.debugService.debug('main: ' + this.findElementsByClassName('main')?.length);
+    this.debugService.debug('stats: ' + this.findElementsByClassName('stats')?.length);
+    this.debugService.debug('footer: ' + this.findElementsByClassName('footer')?.length);
+    this.debugService.debug('maincontainer: ' + this.findElementsByClassName('maincontainer')?.length);
+    this.debugService.debug('maincont: ' + this.findElementsById('maincont')?.length);
+    this.debugService.debug('navigation: ' + this.findElementsById('navigation')?.length);
+    this.debugService.debug('petition: ' + this.findElementsById('petition')?.length);
   }
 
-  observeHTML(): Observable<SafeHtml> {
-    return this.lastHTML.asObservable();
+  observeHTML(): Observable<HTMLElement> {
+    return this.htmlElement.asObservable();
   }
 
-  private reformatHTML(html: string): SafeHtml {
+  observeSanitizedHTML(): Observable<SafeHtml> {
+    return this.sanitizerHtmlElement.asObservable();
+  }
+
+  public isLoggedIn(): boolean {
+    return this.findElementsByClassName('stats')?.length > 0;
+  }
+
+  private reformatHTML(html: string): HTMLElement {
     const containerHTML: HTMLElement = document.createElement('html');
     if (html) {
       containerHTML.innerHTML = html;
       this.removeImgs(containerHTML);
       this.removeScipts(containerHTML);
-
-      const nav: HTMLCollectionOf<Element> = containerHTML.getElementsByClassName('nav');
-      const main: HTMLCollectionOf<Element> = containerHTML.getElementsByClassName('main');
-      const stats: HTMLCollectionOf<Element> = containerHTML.getElementsByClassName('stats');
-      const footer: HTMLCollectionOf<Element> = containerHTML.getElementsByClassName('footer');
-      nav.item(0)?.remove();
-      stats.item(0)?.remove();
-      footer.item(0)?.remove();
     }
-    return this.sanitizer.bypassSecurityTrustHtml(containerHTML.innerHTML);
+    return containerHTML;
+  }
+
+  private findElementsByClassName(className: string): Element[] {
+    return Array.from(this.htmlElement.getValue().getElementsByClassName(className));
+  }
+
+  private findElementsById(id: string) {
+    return Array.from(this.htmlElement.getValue().getElementsByTagName(id));
   }
 
   private removeScipts(containerHTML: HTMLElement) {
