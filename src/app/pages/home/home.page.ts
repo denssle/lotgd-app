@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HtmlResponseService} from '../../services/html-response.service';
 import {DebugService} from '../../services/debug.service';
+import {SafeHtml} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -8,15 +9,15 @@ import {DebugService} from '../../services/debug.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage implements OnInit {
-  html: string;
+  html: SafeHtml;
 
-  constructor(private responseService: HtmlResponseService, private debug: DebugService) {
+  constructor(private responseService: HtmlResponseService, private debugService: DebugService) {
   }
 
   ngOnInit(): void {
-    this.responseService.observeHTML().subscribe((html: string) => {
+    this.responseService.observeHTML().subscribe((html: SafeHtml) => {
       if (html) {
-        this.debug.debug('incoming html' + html.length);
+        this.debugService.debug(JSON.stringify(html));
         this.html = html;
       }
     });

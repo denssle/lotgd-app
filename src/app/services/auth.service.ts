@@ -12,7 +12,7 @@ import {HtmlResponseService} from './html-response.service';
 export class AuthService {
   authenticated: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private http: HttpService, private debug: DebugService,
+  constructor(private http: HttpService, private debugService: DebugService,
               private router: Router, private responseService: HtmlResponseService) {
   }
 
@@ -26,7 +26,9 @@ export class AuthService {
         this.router.navigate(['home']);
       })
       .catch(reason => {
-        this.debug.debug('ERROR: ' + JSON.stringify(reason));
+        this.debugService.debug('ERROR: ' + reason);
+        this.debugService.debug('ERROR: stringify: ' + JSON.stringify(reason));
+        this.authenticated.next(false);
       });
   }
 }
