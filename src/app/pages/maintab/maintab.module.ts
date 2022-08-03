@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MaintabPageRoutingModule } from './maintab-routing.module';
 
 import { MaintabPage } from './maintab.page';
+import {DebugMenuComponent} from './debug-menu/debug-menu.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,6 @@ import { MaintabPage } from './maintab.page';
     IonicModule,
     MaintabPageRoutingModule
   ],
-  declarations: [MaintabPage]
+  declarations: [MaintabPage, DebugMenuComponent]
 })
 export class MaintabPageModule {}

@@ -1,9 +1,11 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>statstab</ion-title>
+    <ion-title>
+      Status
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <ion-card *ngFor="let element of elements" [innerHTML]="element?.innerHTML"></ion-card>
 </ion-content>

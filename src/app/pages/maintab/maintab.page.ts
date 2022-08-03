@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HtmlResponseService} from '../../services/html-response.service';
 
 @Component({
   selector: 'app-maintab',
@@ -6,10 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./maintab.page.scss'],
 })
 export class MaintabPage implements OnInit {
+  elements: Element[] = [];
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private responseService: HtmlResponseService) {
   }
 
+  ngOnInit() {
+    this.responseService.observeSanitizedHTML().subscribe(() => {
+      this.elements = this.responseService.getMainElements();
+    });
+  }
 }
