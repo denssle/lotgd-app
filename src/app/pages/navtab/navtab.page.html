@@ -1,12 +1,16 @@
+<app-nav-menu></app-nav-menu>
 
 <ion-header>
   <ion-toolbar>
     <ion-title>
 
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content id="nav-menu">
   <ion-card *ngFor="let element of elements" [innerHTML]="element?.innerHTML"></ion-card>
 </ion-content>

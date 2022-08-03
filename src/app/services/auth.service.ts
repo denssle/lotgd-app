@@ -24,7 +24,7 @@ export class AuthService {
         this.responseService.update(response.data);
         if (this.responseService.isLoggedIn()) {
           this.authenticated.next(true);
-          this.router.navigate(['home']);
+          this.router.navigate(['home', 'maintab']);
         } else {
           this.debugService.debug('Auth failed ');
         }

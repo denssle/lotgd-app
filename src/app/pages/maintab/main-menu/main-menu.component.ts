@@ -3,11 +3,11 @@ import {Subscription} from 'rxjs';
 import {DebugService} from '../../../services/debug.service';
 
 @Component({
-  selector: 'app-debug-menu',
-  templateUrl: './debug-menu.component.html',
-  styleUrls: ['./debug-menu.component.scss'],
+  selector: 'app-main-menu',
+  templateUrl: './main-menu.component.html',
+  styleUrls: ['./main-menu.component.scss'],
 })
-export class DebugMenuComponent implements OnInit {
+export class MainMenuComponent implements OnInit {
   selectOptions: string[] = ['all', 'error', 'info'];
   subscriptions: Subscription[] = [];
   debugMessages: string[];

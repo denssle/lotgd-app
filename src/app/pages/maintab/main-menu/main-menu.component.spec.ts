@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { DebugMenuComponent } from './debug-menu.component';
+import { MainMenuComponent } from './main-menu.component';
 
 describe('DebugMenuComponent', () => {
-	let component: DebugMenuComponent;
-	let fixture: ComponentFixture<DebugMenuComponent>;
+	let component: MainMenuComponent;
+	let fixture: ComponentFixture<MainMenuComponent>;
 
 	beforeEach(waitForAsync(() => {
 		TestBed.configureTestingModule({
-			declarations: [ DebugMenuComponent ],
+			declarations: [ MainMenuComponent ],
 			imports: [IonicModule.forRoot()]
 		}).compileComponents();
 
-		fixture = TestBed.createComponent(DebugMenuComponent);
+		fixture = TestBed.createComponent(MainMenuComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	}));

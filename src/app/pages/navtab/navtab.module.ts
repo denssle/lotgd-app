@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
-import { IonicModule } from '@ionic/angular';
+import {IonicModule} from '@ionic/angular';
 
-import { NavtabPageRoutingModule } from './navtab-routing.module';
+import {NavtabPageRoutingModule} from './navtab-routing.module';
 
-import { NavtabPage } from './navtab.page';
+import {NavtabPage} from './navtab.page';
+import {NavMenuComponent} from './nav-menu/nav-menu.component';
 
 @NgModule({
   imports: [
@@ -15,6 +16,7 @@ import { NavtabPage } from './navtab.page';
     IonicModule,
     NavtabPageRoutingModule
   ],
-  declarations: [NavtabPage]
+  declarations: [NavtabPage, NavMenuComponent]
 })
-export class NavtabPageModule {}
+export class NavtabPageModule {
+}
