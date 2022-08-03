@@ -1,12 +1,17 @@
-<ion-header [translucent]="true">
+<app-debug-menu></app-debug-menu>
+
+<ion-header >
   <ion-toolbar>
     <ion-title>
       Start!
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id="mainContent">
   <ion-card [innerHTML]="html">
   </ion-card>
 </ion-content>

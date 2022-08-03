@@ -29,28 +29,6 @@ export class HttpService {
     return this.nativeHTTP.post(url, body, headers);
   }
 
-  public getStartPage() {
-    const promise = this.get('https://lotgd.de/home.php?', {
-      headers: {
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        Accept: 'text/html, application/xhtml+xml, */*',
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      responseType: 'text'
-    });
-
-    promise
-      .then(value => {
-        this.sub.next(value.data);
-      })
-      .catch(reason => {
-        console.log('Http failed', reason);
-      });
-
-    return promise;
-  }
-
   public observeHTML(): Observable<string> {
     return this.sub.asObservable();
   }
