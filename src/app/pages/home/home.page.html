@@ -1,6 +1,6 @@
 <app-debug-menu></app-debug-menu>
 
-<ion-header >
+<ion-header>
   <ion-toolbar>
     <ion-title>
       Start!
@@ -12,6 +12,26 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" id="mainContent">
-  <ion-card [innerHTML]="html">
-  </ion-card>
+  <!--<ion-card [innerHTML]="html"></ion-card>-->
+
+  <ion-tabs>
+
+    <ion-tab-bar slot="bottom">
+      <ion-tab-button tab="navtab">
+        <ion-icon name="compass-outline"></ion-icon>
+        <ion-label>Nav</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="maintab">
+        <ion-icon name="home-outline"></ion-icon>
+        <ion-label>Main</ion-label>
+      </ion-tab-button>
+
+      <ion-tab-button tab="statstab">
+        <ion-icon name="person-outline"></ion-icon>
+        <ion-label>Stats</ion-label>
+      </ion-tab-button>
+    </ion-tab-bar>
+
+  </ion-tabs>
 </ion-content>

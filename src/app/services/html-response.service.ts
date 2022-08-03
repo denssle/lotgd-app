@@ -17,14 +17,6 @@ export class HtmlResponseService {
     const html: HTMLElement = this.reformatHTML(value);
     this.htmlElement.next(html);
     this.sanitizerHtmlElement.next(this.sanitizer.bypassSecurityTrustHtml(html.innerHTML));
-    this.debugService.debug('nav: ' + this.findElementsByClassName('nav')?.length);
-    this.debugService.debug('main: ' + this.findElementsByClassName('main')?.length);
-    this.debugService.debug('stats: ' + this.findElementsByClassName('stats')?.length);
-    this.debugService.debug('footer: ' + this.findElementsByClassName('footer')?.length);
-    this.debugService.debug('maincontainer: ' + this.findElementsByClassName('maincontainer')?.length);
-    this.debugService.debug('maincont: ' + this.findElementsById('maincont')?.length);
-    this.debugService.debug('navigation: ' + this.findElementsById('navigation')?.length);
-    this.debugService.debug('petition: ' + this.findElementsById('petition')?.length);
   }
 
   observeHTML(): Observable<HTMLElement> {
@@ -39,6 +31,18 @@ export class HtmlResponseService {
     return this.findElementsByClassName('stats')?.length > 0;
   }
 
+  public getNavElements(): Element[] {
+    return this.findElementsByClassName('navcontainer');
+  }
+
+  public getMainElements(): Element[] {
+    return this.findElementsByClassName('main');
+  }
+
+  public getPetitionElements(): Element[] {
+    return this.findElementsByClassName('petitionclass');
+  }
+
   private reformatHTML(html: string): HTMLElement {
     const containerHTML: HTMLElement = document.createElement('html');
     if (html) {
@@ -51,10 +55,6 @@ export class HtmlResponseService {
 
   private findElementsByClassName(className: string): Element[] {
     return Array.from(this.htmlElement.getValue().getElementsByClassName(className));
-  }
-
-  private findElementsById(id: string) {
-    return Array.from(this.htmlElement.getValue().getElementsByTagName(id));
   }
 
   private removeScipts(containerHTML: HTMLElement) {
