@@ -2,6 +2,8 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {DebugService} from './debug.service';
+import {NavElement} from '../models/NavElement';
+import {LabelService} from './label.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +12,7 @@ export class HtmlResponseService {
   private htmlElement: BehaviorSubject<HTMLElement> = new BehaviorSubject<HTMLElement>(null);
   private sanitizerHtmlElement: BehaviorSubject<SafeHtml> = new BehaviorSubject<SafeHtml>(null);
 
-  constructor(private sanitizer: DomSanitizer, private debugService: DebugService) {
+  constructor(private sanitizer: DomSanitizer, private debugService: DebugService, private labelService: LabelService) {
   }
 
   update(value: string): void {
@@ -31,8 +33,22 @@ export class HtmlResponseService {
     return this.findElementsByClassName('stats')?.length > 0;
   }
 
-  public getNavElements(): Element[] {
-    return this.findElementsByClassName('navcontainer');
+  public getNavElements(): NavElement[] {
+    const links: NavElement[] = [];
+    this.findElementsByClassName('navcontainer').forEach(value => {
+      Array.from(value.getElementsByTagName('a')).forEach(link => {
+        this.debugService.debug('Link: ' + String(link));
+        const url: string = String(link).replace('http://localhost', 'https://lotgd.de');
+        const label = this.labelService.getNavLabel(String(url));
+        if (label) {
+          links.push({
+            url,
+            label,
+          });
+        }
+      });
+    });
+    return links;
   }
 
   public getMainElements(): Element[] {

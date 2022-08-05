@@ -12,11 +12,11 @@ export class NavMenuComponent implements OnInit {
   subscriptions: Subscription[] = [];
   debugMessages: string[];
 
-  constructor(private debug: DebugService) {
+  constructor(private debugService: DebugService) {
   }
 
   ngOnInit() {
-    this.subscriptions.push(this.debug.observe().subscribe(value => {
+    this.subscriptions.push(this.debugService.observe().subscribe(value => {
       this.debugMessages = value;
     }));
   }
@@ -27,6 +27,6 @@ export class NavMenuComponent implements OnInit {
   }
 
   deleteAll(): void {
-    this.debug.reset();
+    this.debugService.reset();
   }
 }

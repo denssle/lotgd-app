@@ -12,5 +12,7 @@
 </ion-header>
 
 <ion-content id="nav-menu">
-  <ion-card *ngFor="let element of elements" [innerHTML]="element?.innerHTML"></ion-card>
+  <ion-button expand="block" *ngFor="let element of elements">
+    {{element.label}}
+  </ion-button>
 </ion-content>

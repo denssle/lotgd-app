@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {HtmlResponseService} from '../../services/html-response.service';
+import {NavElement} from '../../models/NavElement';
 
 @Component({
   selector: 'app-navtab',
@@ -7,7 +8,7 @@ import {HtmlResponseService} from '../../services/html-response.service';
   styleUrls: ['./navtab.page.scss'],
 })
 export class NavtabPage implements OnInit {
-  elements: Element[] = [];
+  elements: NavElement[] = [];
 
   constructor(private responseService: HtmlResponseService) {
   }
