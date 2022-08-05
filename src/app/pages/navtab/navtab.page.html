@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content id="nav-menu">
-  <ion-button expand="block" *ngFor="let element of elements">
+  <ion-button expand="block" *ngFor="let element of elements" (click)="onClick(element)">
     {{element.label}}
   </ion-button>
 </ion-content>

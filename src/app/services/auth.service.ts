@@ -20,9 +20,7 @@ export class AuthService {
 
   public login(name: string, password: string) {
     this.http.post('https://lotgd.de/login.php?', {name, password}, {})
-      .then(value => {
-        const response = value as HTTPResponse;
-        this.responseService.update(response.data);
+      .then(() => {
         if (this.responseService.isLoggedIn()) {
           this.authenticated.next(true);
           this.router.navigate(['home', 'maintab']);

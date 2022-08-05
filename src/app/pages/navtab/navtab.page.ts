@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HtmlResponseService} from '../../services/html-response.service';
 import {NavElement} from '../../models/NavElement';
+import {HttpService} from "../../services/http.service";
 
 @Component({
   selector: 'app-navtab',
@@ -10,7 +11,7 @@ import {NavElement} from '../../models/NavElement';
 export class NavtabPage implements OnInit {
   elements: NavElement[] = [];
 
-  constructor(private responseService: HtmlResponseService) {
+  constructor(private responseService: HtmlResponseService, private http: HttpService) {
   }
 
   ngOnInit() {
@@ -19,4 +20,7 @@ export class NavtabPage implements OnInit {
     });
   }
 
+  onClick(element: NavElement) {
+    this.http.get(element.url, {});
+  }
 }

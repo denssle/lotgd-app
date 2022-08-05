@@ -1,35 +1,29 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {HTTP} from '@awesome-cordova-plugins/http/ngx';
-import {HttpClient} from '@angular/common/http';
-import {PlatformService} from './platform.service';
+import {HTTP, HTTPResponse} from '@awesome-cordova-plugins/http/ngx';
+import {HtmlResponseService} from './html-response.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  private sub: BehaviorSubject<string> = new BehaviorSubject<string>('');
-
-  constructor(private desktopHttp: HttpClient, private nativeHTTP: HTTP, private platformService: PlatformService) {
+  constructor(private nativeHTTP: HTTP, private responseService: HtmlResponseService) {
   }
 
-  public get(url: string, headers: any): Promise<any> {
-    if (this.platformService.isRunningOnDesktop()) {
-      return this.desktopHttp.get(url, headers).toPromise();
-    }
-
-    return this.nativeHTTP.get(url, {}, headers);
+  public get(url: string, headers?: any): Promise<any> {
+    const promise = this.nativeHTTP.get(url, {}, headers);
+    promise.then(value => {
+      const response = value as HTTPResponse;
+      this.responseService.update(response.data);
+    });
+    return promise;
   }
 
   public post(url: string, body: any, headers: any): Promise<any> {
-    if (this.platformService.isRunningOnDesktop()) {
-      return this.desktopHttp.post(url, body, headers).toPromise();
-    }
-
-    return this.nativeHTTP.post(url, body, headers);
-  }
-
-  public observeHTML(): Observable<string> {
-    return this.sub.asObservable();
+    const promise = this.nativeHTTP.post(url, body, headers);
+    promise.then(value => {
+      const response = value as HTTPResponse;
+      this.responseService.update(response.data);
+    });
+    return promise;
   }
 }

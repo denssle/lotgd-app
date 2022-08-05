@@ -30,6 +30,7 @@ export class HtmlResponseService {
   }
 
   public isLoggedIn(): boolean {
+    // TODO better check
     return this.findElementsByClassName('stats')?.length > 0;
   }
 
