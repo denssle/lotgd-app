@@ -38,8 +38,8 @@ export class HtmlResponseService {
     const links: NavElement[] = [];
     this.findElementsByClassName('navcontainer').forEach(value => {
       Array.from(value.getElementsByTagName('a')).forEach(link => {
-        this.debugService.debug('Link: ' + String(link));
         const url: string = String(link).replace('http://localhost', 'https://lotgd.de');
+        this.debugService.debug('Link: ' + url);
         const label = this.labelService.getNavLabel(String(url));
         if (label) {
           links.push({

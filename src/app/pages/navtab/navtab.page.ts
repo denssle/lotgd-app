@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HtmlResponseService} from '../../services/html-response.service';
 import {NavElement} from '../../models/NavElement';
-import {HttpService} from "../../services/http.service";
+import {HttpService} from '../../services/http.service';
 
 @Component({
   selector: 'app-navtab',

@@ -11,6 +11,7 @@ export class LabelService {
     ['village_show_street', 'Wohnviertel'],
     ['/village.', 'Stadt'],
     ['/house_logout.', 'Logout'],
+    ['house_enter', 'Zurück ins Haus'],
   ]);
 
   constructor() {
