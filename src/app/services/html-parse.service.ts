@@ -8,7 +8,7 @@ import {LabelService} from './label.service';
 @Injectable({
   providedIn: 'root'
 })
-export class HtmlResponseService {
+export class HtmlParseService {
   private htmlElement: BehaviorSubject<HTMLElement> = new BehaviorSubject<HTMLElement>(null);
   private sanitizerHtmlElement: BehaviorSubject<SafeHtml> = new BehaviorSubject<SafeHtml>(null);
 

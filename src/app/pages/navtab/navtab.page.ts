@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HtmlResponseService} from '../../services/html-response.service';
+import {HtmlParseService} from '../../services/html-parse.service';
 import {NavElement} from '../../models/NavElement';
 import {HttpService} from '../../services/http.service';
 
@@ -11,12 +11,12 @@ import {HttpService} from '../../services/http.service';
 export class NavtabPage implements OnInit {
   elements: NavElement[] = [];
 
-  constructor(private responseService: HtmlResponseService, private http: HttpService) {
+  constructor(private parseService: HtmlParseService, private http: HttpService) {
   }
 
   ngOnInit() {
-    this.responseService.observeSanitizedHTML().subscribe(() => {
-      this.elements = this.responseService.getNavElements();
+    this.parseService.observeSanitizedHTML().subscribe(() => {
+      this.elements = this.parseService.getNavElements();
     });
   }
 

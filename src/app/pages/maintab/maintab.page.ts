@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HtmlResponseService} from '../../services/html-response.service';
+import {HtmlParseService} from '../../services/html-parse.service';
 
 @Component({
   selector: 'app-maintab',
@@ -9,12 +9,12 @@ import {HtmlResponseService} from '../../services/html-response.service';
 export class MaintabPage implements OnInit {
   elements: Element[] = [];
 
-  constructor(private responseService: HtmlResponseService) {
+  constructor(private parseService: HtmlParseService) {
   }
 
   ngOnInit() {
-    this.responseService.observeSanitizedHTML().subscribe(() => {
-      this.elements = this.responseService.getMainElements();
+    this.parseService.observeSanitizedHTML().subscribe(() => {
+      this.elements = this.parseService.getMainElements();
     });
   }
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {HtmlResponseService} from '../../services/html-response.service';
+import {HtmlParseService} from '../../services/html-parse.service';
 import {DebugService} from '../../services/debug.service';
 import {SafeHtml} from '@angular/platform-browser';
 
@@ -11,11 +11,11 @@ import {SafeHtml} from '@angular/platform-browser';
 export class HomePage implements OnInit {
   html: SafeHtml;
 
-  constructor(private responseService: HtmlResponseService, private debugService: DebugService) {
+  constructor(private parseService: HtmlParseService, private debugService: DebugService) {
   }
 
   ngOnInit(): void {
-    this.responseService.observeSanitizedHTML().subscribe((html: SafeHtml) => {
+    this.parseService.observeSanitizedHTML().subscribe((html: SafeHtml) => {
       if (html) {
         this.html = html;
       }
