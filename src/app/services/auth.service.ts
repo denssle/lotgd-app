@@ -5,7 +5,7 @@ import {HTTPResponse} from '@awesome-cordova-plugins/http/ngx';
 import {BehaviorSubject} from 'rxjs';
 import {Router} from '@angular/router';
 import {HtmlResponseService} from './html-response.service';
-import {PopupAndToastService} from "./popup-and-toast.service";
+import {PopupAndToastService} from './popup-and-toast.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +20,9 @@ export class AuthService {
 
   public login(name: string, password: string) {
     this.http.post('https://lotgd.de/login.php?', {name, password}, {})
-      .then(() => {
+      .then(value => {
+        const response = value as HTTPResponse;
+        this.responseService.update(response.data);
         if (this.responseService.isLoggedIn()) {
           this.authenticated.next(true);
           this.router.navigate(['home', 'maintab']);
