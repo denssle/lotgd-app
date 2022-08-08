@@ -8,14 +8,16 @@ import {NavtabPageRoutingModule} from './navtab-routing.module';
 
 import {NavtabPage} from './navtab.page';
 import {NavMenuComponent} from './nav-menu/nav-menu.component';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    NavtabPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        NavtabPageRoutingModule,
+        SharedModule
+    ],
   declarations: [NavtabPage, NavMenuComponent]
 })
 export class NavtabPageModule {

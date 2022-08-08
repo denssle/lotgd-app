@@ -8,14 +8,16 @@ import { MaintabPageRoutingModule } from './maintab-routing.module';
 
 import { MaintabPage } from './maintab.page';
 import {MainMenuComponent} from './main-menu/main-menu.component';
+import {SharedModule} from "../../shared/shared.module";
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    MaintabPageRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        MaintabPageRoutingModule,
+        SharedModule
+    ],
   declarations: [MaintabPage, MainMenuComponent]
 })
 export class MaintabPageModule {}
