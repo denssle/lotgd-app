@@ -8,16 +8,16 @@ import {StatstabPageRoutingModule} from './statstab-routing.module';
 
 import {StatstabPage} from './statstab.page';
 import {StatsMenuComponent} from './stats-menu/stats-menu.component';
-import {SharedModule} from "../../shared/shared.module";
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        StatstabPageRoutingModule,
-        SharedModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    StatstabPageRoutingModule,
+    SharedModule
+  ],
   declarations: [StatstabPage, StatsMenuComponent]
 })
 export class StatstabPageModule {

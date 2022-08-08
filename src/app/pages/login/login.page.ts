@@ -5,6 +5,7 @@ import {AuthService} from '../../services/auth.service';
 import {DebugService} from '../../services/debug.service';
 import {PlatformService} from '../../services/platform.service';
 import {User} from '../../models/User';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-login-page',
@@ -15,6 +16,7 @@ export class LoginPage implements OnInit {
   formGroup: FormGroup;
   debugMessages: string[] = [];
   loadedUsers: User[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private formBuilder: FormBuilder,
               private authService: AuthService, private debugService: DebugService,
@@ -23,9 +25,9 @@ export class LoginPage implements OnInit {
 
   ngOnInit() {
     this.platformService.loadAppInfos();
-    this.debugService.observe().subscribe(value => {
+    this.subscriptions.push(this.debugService.observe().subscribe(value => {
       this.debugMessages = value;
-    });
+    }));
     this.formGroup = this.formBuilder.group({
       userName: [null, [Validators.minLength(3), Validators.required]],
       password: [null, [Validators.minLength(3), Validators.required]],
@@ -34,7 +36,10 @@ export class LoginPage implements OnInit {
   }
 
   ionViewWillLeave(): void {
+    this.subscriptions.forEach(value => value?.unsubscribe());
+    this.subscriptions = [];
     this.formGroup.reset();
+
   }
 
   onLoginClick(): void {

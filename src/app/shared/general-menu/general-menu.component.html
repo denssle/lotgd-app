@@ -1,11 +1,12 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Debug - Menu</ion-title>
+    <ion-title>{{title ?? 'Debug - Menu'}}</ion-title>
     <ion-fab-button (click)="deleteAll()" style="float: right">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-fab-button>
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let debugMessage of debugMessages">

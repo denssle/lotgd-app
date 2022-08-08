@@ -15,9 +15,11 @@ export class HtmlParseService {
   }
 
   update(value: string): void {
-    const html: HTMLElement = this.reformatHTML(value);
-    this.htmlElement.next(html);
-    this.sanitizerHtmlElement.next(this.sanitizer.bypassSecurityTrustHtml(html.innerHTML));
+    if (value) {
+      const html: HTMLElement = this.reformatHTML(value);
+      this.htmlElement.next(html);
+      this.sanitizerHtmlElement.next(this.sanitizer.bypassSecurityTrustHtml(html.innerHTML));
+    }
   }
 
   observeHTML(): Observable<HTMLElement> {
@@ -66,7 +68,10 @@ export class HtmlParseService {
   }
 
   private findElementsByClassName(className: string): Element[] {
-    return Array.from(this.htmlElement.getValue().getElementsByClassName(className));
+    if (this.htmlElement.getValue() && className) {
+      return Array.from(this.htmlElement.getValue().getElementsByClassName(className));
+    }
+    return [];
   }
 
   private removeScipts(containerHTML: HTMLElement) {

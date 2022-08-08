@@ -10,8 +10,8 @@ import {DebugService} from '../../services/debug.service';
 export class GeneralMenuComponent implements OnInit {
   @Input() title: string;
   selectOptions: string[] = ['all', 'error', 'info'];
-  subscriptions: Subscription[] = [];
   debugMessages: string[];
+  private subscriptions: Subscription[] = [];
 
   constructor(private debug: DebugService) {
   }
