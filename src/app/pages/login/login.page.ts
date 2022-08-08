@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../services/auth.service';
 import {DebugService} from '../../services/debug.service';
 import {PlatformService} from '../../services/platform.service';
+import {User} from '../../models/User';
 
 @Component({
   selector: 'app-login-page',
@@ -13,6 +14,7 @@ import {PlatformService} from '../../services/platform.service';
 export class LoginPage implements OnInit {
   formGroup: FormGroup;
   debugMessages: string[] = [];
+  loadedUsers: User[] = [];
 
   constructor(private router: Router, private formBuilder: FormBuilder,
               private authService: AuthService, private debugService: DebugService,
@@ -28,6 +30,7 @@ export class LoginPage implements OnInit {
       userName: [null, [Validators.minLength(3), Validators.required]],
       password: [null, [Validators.minLength(3), Validators.required]],
     });
+    this.loadedUsers = this.authService.getSavedUsers();
   }
 
   ionViewWillLeave(): void {
@@ -54,5 +57,10 @@ export class LoginPage implements OnInit {
 
   getVersion() {
     return this.platformService.getVersion();
+  }
+
+  onUserClick(user: User) {
+    this.formGroup.get('userName').setValue(user.name);
+    this.formGroup.get('password').setValue(user.password);
   }
 }

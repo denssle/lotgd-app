@@ -16,7 +16,12 @@ export class NavtabPage implements OnInit {
 
   ngOnInit() {
     this.parseService.observeSanitizedHTML().subscribe(() => {
-      this.elements = this.parseService.getNavElements();
+      const newElements = this.parseService.getNavElements();
+      if (newElements && newElements.length > 0) {
+        this.elements = newElements;
+      } else {
+        this.elements = [];
+      }
     });
   }
 

@@ -24,6 +24,15 @@
   </ion-card>
 
   <ion-card>
+    <ion-card-title>Gespeicherte Charaktere</ion-card-title>
+    <ion-card-content>
+      <ion-item *ngFor="let user of loadedUsers">
+        <ion-text (click)="onUserClick(user)">{{user.name}}</ion-text>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card>
     <ion-card-title>Debug</ion-card-title>
     <ion-card-content>
       <ion-fab-button (click)="deleteAll()" slot="end">
