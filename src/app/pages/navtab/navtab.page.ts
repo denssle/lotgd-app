@@ -3,6 +3,7 @@ import {HtmlParseService} from '../../services/html-parse.service';
 import {NavElement} from '../../models/NavElement';
 import {HttpService} from '../../services/http.service';
 import {Subscription} from 'rxjs';
+import {MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-navtab',
@@ -13,7 +14,7 @@ export class NavtabPage implements OnInit {
   elements: NavElement[] = [];
   private subscriptions: Subscription[] = [];
 
-  constructor(private parseService: HtmlParseService, private http: HttpService) {
+  constructor(private parseService: HtmlParseService, private http: HttpService, private menu: MenuController) {
   }
 
   ngOnInit() {
@@ -34,5 +35,16 @@ export class NavtabPage implements OnInit {
 
   onClick(element: NavElement) {
     this.http.get(element.url, {});
+  }
+
+  // Manchmal öffnet das Menu nicht, das erzwingt es.
+  onMenuButtonClick() {
+    const menuid = 'nav-menu-id';
+    this.menu.isOpen(menuid).then(value => {
+      if (!value) {
+        this.menu.enable(true, menuid);
+        this.menu.open(menuid);
+      }
+    });
   }
 }
