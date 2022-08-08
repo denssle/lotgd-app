@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {DebugService} from '../../services/debug.service';
+import {AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-general-menu',
@@ -13,7 +14,7 @@ export class GeneralMenuComponent implements OnInit {
   debugMessages: string[];
   private subscriptions: Subscription[] = [];
 
-  constructor(private debug: DebugService) {
+  constructor(private debug: DebugService, private auth: AuthService) {
   }
 
   ngOnInit() {
@@ -31,4 +32,7 @@ export class GeneralMenuComponent implements OnInit {
     this.debug.reset();
   }
 
+  clickLogout() {
+    this.auth.logout();
+  }
 }

@@ -19,8 +19,7 @@ export class AuthService {
               private toastService: PopupAndToastService) {
     this.parseService.observeHTML().subscribe(() => {
       if (!this.parseService.isLoggedIn()) {
-        this.router.navigate(['login']);
-        this.user = null;
+        this.logout();
       }
     });
   }
@@ -49,6 +48,11 @@ export class AuthService {
         this.debugService.debug('ERROR: ' + reason);
         this.debugService.debug('ERROR: stringify: ' + JSON.stringify(reason));
       });
+  }
+
+  public logout(): void {
+    this.router.navigate(['login']);
+    this.user = null;
   }
 
   public getSavedUsers(): User[] {

@@ -8,6 +8,9 @@
 </ion-header>
 
 <ion-content>
+
+  <ion-button expand="full" (click)="clickLogout()">Logout</ion-button>
+
   <ion-list>
     <ion-item *ngFor="let debugMessage of debugMessages">
       <ion-card>
