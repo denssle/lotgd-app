@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {DebugService} from '../../services/debug.service';
 import {AuthService} from '../../services/auth.service';
+import {HttpService} from '../../services/http.service';
 
 @Component({
   selector: 'app-general-menu',
@@ -14,7 +15,7 @@ export class GeneralMenuComponent implements OnInit {
   debugMessages: string[];
   private subscriptions: Subscription[] = [];
 
-  constructor(private debug: DebugService, private auth: AuthService) {
+  constructor(private debug: DebugService, private auth: AuthService, private http: HttpService) {
   }
 
   ngOnInit() {
@@ -34,5 +35,9 @@ export class GeneralMenuComponent implements OnInit {
 
   clickLogout() {
     this.auth.logout();
+  }
+
+  clickRefresh() {
+    this.http.get('https://lotgd.de');
   }
 }
