@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HtmlParseService} from '../../services/html-parse.service';
 import {NavElement} from '../../models/NavElement';
 import {HttpService} from '../../services/http.service';
@@ -10,14 +10,14 @@ import {MenuController} from '@ionic/angular';
   templateUrl: './navtab.page.html',
   styleUrls: ['./navtab.page.scss'],
 })
-export class NavtabPage implements OnInit {
+export class NavtabPage{
   elements: NavElement[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(private parseService: HtmlParseService, private http: HttpService, private menu: MenuController) {
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscriptions.push(this.parseService.observeSanitizedHTML().subscribe(() => {
       const newElements = this.parseService.getNavElements();
       if (newElements && newElements.length > 0) {

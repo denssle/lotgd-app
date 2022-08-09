@@ -7,12 +7,18 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content style="min-height: 80vh">
 
-  <ion-button expand="full" (click)="clickRefresh()">Refresh</ion-button>
+  <ion-card>
+    <ion-card-content>
+      <ion-button (click)="clickRefresh()">Refresh</ion-button>
 
-  <ion-button expand="full" (click)="clickLogout()">Logout</ion-button>
+      <ion-button (click)="clickLogout()">Logout</ion-button>
+    </ion-card-content>
+  </ion-card>
 
+
+  <ion-card-subtitle>Debug Messages:</ion-card-subtitle>
   <ion-list>
     <ion-item *ngFor="let debugMessage of debugMessages">
       <ion-card>

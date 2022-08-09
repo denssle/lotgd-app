@@ -33,6 +33,7 @@ export class LoginPage implements OnInit {
       password: [null, [Validators.minLength(3), Validators.required]],
     });
     this.loadedUsers = this.authService.getSavedUsers();
+    this.debugService.debug('Loaded Users: ' + this.loadedUsers);
   }
 
   ionViewWillLeave(): void {

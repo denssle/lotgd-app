@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {HtmlParseService} from '../../services/html-parse.service';
 import {Subscription} from 'rxjs';
 import {MenuController} from '@ionic/angular';
@@ -8,14 +8,14 @@ import {MenuController} from '@ionic/angular';
   templateUrl: './statstab.page.html',
   styleUrls: ['./statstab.page.scss'],
 })
-export class StatstabPage implements OnInit {
+export class StatstabPage {
   elements: Element[] = [];
   private subscriptions: Subscription[] = [];
 
   constructor(private parseService: HtmlParseService, private menu: MenuController) {
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.subscriptions.push(this.parseService.observeSanitizedHTML().subscribe(() => {
       this.elements = this.parseService.getPetitionElements();
     }));
