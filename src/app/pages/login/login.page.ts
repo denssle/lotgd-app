@@ -6,6 +6,7 @@ import {DebugService} from '../../services/debug.service';
 import {PlatformService} from '../../services/platform.service';
 import {User} from '../../models/User';
 import {Subscription} from 'rxjs';
+import {StorageService} from '../../services/storage.service';
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +20,7 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router, private formBuilder: FormBuilder,
               private authService: AuthService, private debugService: DebugService,
-              private platformService: PlatformService) {
+              private platformService: PlatformService, private storageService: StorageService) {
   }
 
   ngOnInit() {
@@ -31,7 +32,9 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.platformService.loadAppInfos();
-    this.loadedUsers = this.authService.getSavedUsers();
+    this.storageService.getUsers().then(value => {
+      this.loadedUsers = value;
+    });
     this.debugService.debug('Loaded Users: ' + this.loadedUsers);
   }
 
