@@ -15,9 +15,6 @@ export class DebugComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  ionViewWillEnter() {
     this.subscriptions.push(this.debugService.observe().subscribe(value => {
       this.debugMessages = value;
     }));

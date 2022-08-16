@@ -34,8 +34,8 @@ export class LoginPage implements OnInit {
     this.platformService.loadAppInfos();
     this.storageService.getUsers().then(value => {
       this.loadedUsers = value;
+      this.debugService.debug('Loaded Users: ' + this.loadedUsers);
     });
-    this.debugService.debug('Loaded Users: ' + this.loadedUsers);
   }
 
   ionViewWillLeave(): void {
