@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^14.0.6",
     "@angular/router": "^14.0.6",
     "@awesome-cordova-plugins/http": "^5.44.0",
+    "@awesome-cordova-plugins/native-storage": "^5.44.0",
     "@capacitor/android": "^3.6.0",
     "@capacitor/app": "^1.1.1",
     "@capacitor/core": "^3.6.0",
@@ -32,6 +33,7 @@
     "@ionic/cli": "^6.20.1",
     "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-file": "^7.0.0",
+    "cordova-plugin-nativestorage": "^2.3.2",
     "rxjs": "^6.5.0",
     "tslib": "^2.4.0",
     "zone.js": "^0.11.6"

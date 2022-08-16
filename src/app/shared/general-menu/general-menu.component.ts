@@ -10,7 +10,6 @@ import {HttpService} from '../../services/http.service';
 })
 export class GeneralMenuComponent implements OnInit {
   @Input() title: string;
-  selectOptions: string[] = ['all', 'error', 'info'];
 
   constructor(private debugService: DebugService, private auth: AuthService, private http: HttpService) {
   }
