@@ -14,7 +14,6 @@ import {Subscription} from 'rxjs';
 })
 export class LoginPage implements OnInit {
   formGroup: FormGroup;
-  debugMessages: string[] = [];
   loadedUsers: User[] = [];
   private subscriptions: Subscription[] = [];
 
@@ -32,9 +31,6 @@ export class LoginPage implements OnInit {
 
   ionViewWillEnter() {
     this.platformService.loadAppInfos();
-    this.subscriptions.push(this.debugService.observe().subscribe(value => {
-      this.debugMessages = value;
-    }));
     this.loadedUsers = this.authService.getSavedUsers();
     this.debugService.debug('Loaded Users: ' + this.loadedUsers);
   }
@@ -43,7 +39,6 @@ export class LoginPage implements OnInit {
     this.subscriptions.forEach(value => value?.unsubscribe());
     this.subscriptions = [];
     this.formGroup.reset();
-
   }
 
   onLoginClick(): void {
@@ -58,10 +53,6 @@ export class LoginPage implements OnInit {
 
   inputInvalid(controlName: string): boolean {
     return this.formGroup.get(controlName).invalid && this.formGroup.get(controlName).dirty;
-  }
-
-  deleteAll(): void {
-    this.debugService.reset();
   }
 
   getVersion() {
