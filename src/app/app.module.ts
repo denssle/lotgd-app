@@ -7,6 +7,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {ApiInterceptor} from './interceptors/http.interceptor';
 import {HTTP} from '@awesome-cordova-plugins/http/ngx';
+import {NativeStorage} from '@awesome-cordova-plugins/native-storage/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -20,6 +21,7 @@ import {HTTP} from '@awesome-cordova-plugins/http/ngx';
       multi: true
     },
     HTTP,
+    NativeStorage,
   ],
   bootstrap: [AppComponent],
 })
