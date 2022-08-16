@@ -24,14 +24,17 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    this.platformService.loadAppInfos();
-    this.subscriptions.push(this.debugService.observe().subscribe(value => {
-      this.debugMessages = value;
-    }));
     this.formGroup = this.formBuilder.group({
       userName: [null, [Validators.minLength(3), Validators.required]],
       password: [null, [Validators.minLength(3), Validators.required]],
     });
+  }
+
+  ionViewWillEnter() {
+    this.platformService.loadAppInfos();
+    this.subscriptions.push(this.debugService.observe().subscribe(value => {
+      this.debugMessages = value;
+    }));
     this.loadedUsers = this.authService.getSavedUsers();
     this.debugService.debug('Loaded Users: ' + this.loadedUsers);
   }

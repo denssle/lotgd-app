@@ -61,9 +61,8 @@ export class HtmlParseService {
     const containerHTML: HTMLElement = document.createElement('html');
     if (html) {
       containerHTML.innerHTML = html;
-      this.removeImgs(containerHTML);
-      this.removeScripts(containerHTML);
-      this.fixLinks(containerHTML);
+      // this.removeImgs(containerHTML);
+      // this.removeScripts(containerHTML);
     }
     return containerHTML;
   }
@@ -75,7 +74,7 @@ export class HtmlParseService {
     return [];
   }
 
-  private removeScripts(containerHTML: HTMLElement) {
+  private removeScripts(containerHTML: HTMLElement): void {
     Array.from(containerHTML.getElementsByTagName('script')).forEach(value => {
       value.remove();
     });
@@ -84,12 +83,6 @@ export class HtmlParseService {
   private removeImgs(containerHTML: HTMLElement): void {
     Array.from(containerHTML.getElementsByTagName('img')).forEach(value => {
       value.remove();
-    });
-  }
-
-  private fixLinks(containerHTML: HTMLElement): void {
-    Array.from(containerHTML.getElementsByTagName('a')).forEach(value => {
-      String(value).replace('http://localhost', 'https://lotgd.de');
     });
   }
 }

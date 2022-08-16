@@ -24,7 +24,7 @@ export class AuthService {
     });
   }
 
-  public login(name: string, password: string) {
+  public login(name: string, password: string): void {
     this.http.post('https://lotgd.de/login.php?', {name, password}, {})
       .then(value => {
         const response = value as HTTPResponse;
@@ -59,7 +59,7 @@ export class AuthService {
     return this.loadLocalSavedUsers();
   }
 
-  private saveUserLocal(user: User) {
+  private saveUserLocal(user: User): void {
     const loaded = this.loadLocalSavedUsers();
     const index = loaded.indexOf(user);
     if (index) {
