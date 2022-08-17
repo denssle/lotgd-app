@@ -32,7 +32,7 @@ export class HtmlParseService {
 
   public isLoggedIn(): boolean {
     // TODO better check
-    return this.findElementsByClassName('stats')?.length > 0;
+    return this.findElementsByClassName('charinfo')?.length > 0 && !location.toString().includes('/home.php?');
   }
 
   public getNavElements(): NavElement[] {
