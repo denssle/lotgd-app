@@ -16,7 +16,7 @@ export class StorageService {
   public saveUser(user: User): void {
     if (this.platformService.isRunningMobile()) {
       this.getUsers().then(loaded => {
-        if (loaded) {
+        if (loaded && loaded.length > 0) {
           const index = loaded.indexOf(user);
           if (index) {
             // already existing
@@ -24,13 +24,15 @@ export class StorageService {
           } else {
             loaded.push(user);
           }
-          this.nativeStorage.setItem(this.userskey, JSON.stringify(loaded)).catch(reason => {
-            this.handleError(reason);
-          });
+          this.nativeStorage.setItem(this.userskey, JSON.stringify(loaded))
+            .catch(reason => {
+              this.handleError('SAVE: ' + reason);
+            });
         } else {
-          this.nativeStorage.setItem(this.userskey, JSON.stringify([user])).catch(reason => {
-            this.handleError(reason);
-          });
+          this.nativeStorage.setItem(this.userskey, JSON.stringify([user]))
+            .catch(reason => {
+              this.handleError('SAVE: ' + reason);
+            });
         }
       });
     }
@@ -42,6 +44,7 @@ export class StorageService {
         this.loadUsers().then(value => {
           resolve(value);
         }).catch(reason => {
+          this.handleError('LOAD: ' + reason);
           reject(reason);
         });
       });
@@ -51,15 +54,14 @@ export class StorageService {
     });
   }
 
-  // TODO FIX!!!
   private async loadUsers(): Promise<User[]> {
-    this.nativeStorage.getItem(this.userskey)
-      .then(value => {
-        JSON.parse(value);
-      })
-      .catch(reason => {
-        this.handleError(reason);
-      });
+    try {
+      const item: string = await this.nativeStorage.getItem(this.userskey);
+      return JSON.parse(item);
+    } catch (e) {
+      this.handleError('LOAD: ' + e);
+      return [];
+    }
   }
 
   private handleError(reason: string) {
