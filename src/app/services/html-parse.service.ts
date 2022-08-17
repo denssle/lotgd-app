@@ -39,7 +39,7 @@ export class HtmlParseService {
     const links: NavElement[] = [];
     this.findElementsByClassName('navcontainer').forEach(value => {
       Array.from(value.getElementsByTagName('a')).forEach(linkElement => {
-        const url: string = String(linkElement).replace('http://localhost', 'https://lotgd.de');
+        const url: string = this.fixURL(String(linkElement));
         links.push({
           url,
           label: linkElement.innerText,
@@ -57,10 +57,17 @@ export class HtmlParseService {
     return this.findElementsByClassName('petitionclass');
   }
 
+  private fixURL(url: string) {
+    return url.replace('http://localhost', 'https://lotgd.de');
+  }
+
   private reformatHTML(html: string): HTMLElement {
     const containerHTML: HTMLElement = document.createElement('html');
     if (html) {
       containerHTML.innerHTML = html;
+      Array.from(containerHTML.getElementsByTagName('a')).forEach(value => {
+        value.href = this.fixURL(String(value));
+      });
       // this.removeImgs(containerHTML);
       // this.removeScripts(containerHTML);
     }
