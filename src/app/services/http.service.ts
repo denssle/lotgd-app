@@ -1,13 +1,12 @@
 import {Injectable} from '@angular/core';
 import {HTTP, HTTPResponse} from '@awesome-cordova-plugins/http/ngx';
 import {HtmlParseService} from './html-parse.service';
-import {DebugService} from './debug.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
-  constructor(private nativeHTTP: HTTP, private parseService: HtmlParseService, private debugService: DebugService) {
+  constructor(private nativeHTTP: HTTP, private parseService: HtmlParseService) {
   }
 
   public get(url: string, headers?: any): Promise<any> {

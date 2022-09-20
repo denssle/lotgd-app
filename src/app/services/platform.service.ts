@@ -31,8 +31,4 @@ export class PlatformService {
   getVersion(): string {
     return this.appInfo?.version ?? 'No version found. ';
   }
-
-  isRunningMobile(): boolean {
-    return !this.isRunningOnDesktop();
-  }
 }

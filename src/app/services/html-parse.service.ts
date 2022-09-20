@@ -66,10 +66,12 @@ export class HtmlParseService {
     if (html) {
       containerHTML.innerHTML = html;
       Array.from(containerHTML.getElementsByTagName('a')).forEach(value => {
-        value.href = this.fixURL(String(value));
+        if (value.href) {
+          value.href = this.fixURL(String(value));
+        } else {
+          this.debugService.debug('Link without href' + value + ' ' + value.innerText);
+        }
       });
-      // this.removeImgs(containerHTML);
-      // this.removeScripts(containerHTML);
     }
     return containerHTML;
   }
@@ -79,17 +81,5 @@ export class HtmlParseService {
       return Array.from(this.htmlElement.getValue().getElementsByClassName(className));
     }
     return [];
-  }
-
-  private removeScripts(containerHTML: HTMLElement): void {
-    Array.from(containerHTML.getElementsByTagName('script')).forEach(value => {
-      value.remove();
-    });
-  }
-
-  private removeImgs(containerHTML: HTMLElement): void {
-    Array.from(containerHTML.getElementsByTagName('img')).forEach(value => {
-      value.remove();
-    });
   }
 }
